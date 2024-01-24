@@ -1,10 +1,9 @@
 #!/usr/bin/php8.2
 <?php
 
+$defaultdata = array( "showpassword"=>"yes", "bgcolor"=>"#ffffff");
 
-
-function xor_encrypt($in) {
-    $key = json_encode(array( "showpassword"=>"yes", "bgcolor"=>"#ffffff"));
+function xor_encrypt($in,$key) {
     $text = $in; 
     $outText = '';
 
@@ -15,11 +14,13 @@ function xor_encrypt($in) {
 
     return $outText;
 }
+$key = 'KNHL';
 
-$plaintext = array( "showpassword"=>"no", "bgcolor"=>"#ffffff" );
-$cookie =base64_decode('MGw7JCQ5OC04PT8jOSpqdmkgJ25nbCorKCEkIzlscm5oKC4qLSgubjY=');
-echo $cookie;
+$ciphertext = base64_decode('MGw7JCQ5OC04PT8jOSpqdmkgJ25nbCorKCEkIzlscm5oKC4qLSgubjY=');
 
-print  base64_encode($plaintext);
+$good_data= json_encode($defaultdata);
+
+echo xor_encrypt($good_data,$key);
+//this is the result when piped with base64 encode 'MGw7JCQ5OC04PT8jOSpqdmk3LT9pYmouLC0nICQ8anZpbS4qLSguKmkz'
 
 ?>
